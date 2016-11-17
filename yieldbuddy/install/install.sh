@@ -77,7 +77,7 @@ echo "Copying nginx config file"
 sudo cp -r /etc/nginx ./config/backup/
 sudo cp ./config/nginx/*/* /etc/nginx
 echo "Setup for document root: /var/www/"
-echo "If you want, change '/etc/nginx/sites-enabled/default' to set the website's root directory.  ie  'root /mnt/usb'"
+echo "If you have a USB system, change '/etc/nginx/sites-enabled/default' to set the website's root directory to the correct device.  ie  'root /mnt/usb'"
 fi
 echo ""
 echo "Installing PHP"
@@ -90,14 +90,16 @@ if [ "$REPLY" = "y" ]; then
 sudo cp /etc/php5/fpm/pool.d/www.conf ./config/backup/php5/www.conf
 sudo cp ./config/php5/www.conf /etc/php5/fpm/pool.d/www.conf
 fi
-echo "Installing PyCrypto 2.6 - this will take quite a bit of time!  Go grab a coffee."
-echo "(Step 1/3: Installing python-dev):"
-sudo apt-get -y install python-dev
-echo "(Step 2/3: Building PyCrypto 2.6):"
-cd ./pycrypto-2.6
-sudo python ./setup.py build
-echo "(Step 3/3: Installing PyCrypto 2.6):"
-sudo python ./setup.py install
+echo "Installing PyCrypto 2.6"
+sudo apt-get install python-crypto
+# echo "Building PyCrypto 2.6 - this will take quite a bit of time!  Go grab a coffee."
+# echo "(Step 1/3: Installing python-dev):"
+# sudo apt-get -y install python-dev
+# echo "(Step 2/3: Building PyCrypto 2.6):"
+# cd ./pycrypto-2.6
+# sudo python ./setup.py build
+# echo "(Step 3/3: Installing PyCrypto 2.6):"
+# sudo python ./setup.py install
 echo ""
 echo "Installing Motion (Webcam Server)..."
 echo ""
