@@ -26,6 +26,7 @@ echo ""
 echo "Changing file permissions..."
 sudo chmod 751 /var/www/yieldbuddy
 sudo chmod 750 /var/www/yieldbuddy/*
+sudo touch /var/www/yieldbuddy/Command
 sudo chmod 777 /var/www/yieldbuddy/Command
 sudo chmod 775 /var/www/yieldbuddy/index.html
 sudo chmod 751 /var/www/yieldbuddy/restart_mtn
@@ -44,6 +45,7 @@ sudo chmod 751 /var/www/yieldbuddy/www/settings/
 sudo chmod 751 /var/www/yieldbuddy/www/sql/
 sudo chmod 751 /var/www/yieldbuddy/www/upload
 sudo chmod 751 /var/www/yieldbuddy/www/users/
+sudo chown -R pi:pi /var/www
 echo ""
 echo "Warning: the following command OVERWRITES the boot cmdline.txt file."
 echo "Warning: if you have an external USB storage, this could overwrite the configuration"
@@ -75,7 +77,7 @@ read -p "Would you like to copy site setting and overwrite nginx config files in
 if [ "$REPLY" = "y" ]; then
 echo "Copying nginx config file"
 sudo cp -r /etc/nginx ./config/backup/
-sudo cp ./config/nginx/*/* /etc/nginx
+sudo cp -R ./config/nginx /etc/
 echo "Setup for document root: /var/www/"
 echo "If you have a USB system, change '/etc/nginx/sites-enabled/default' to set the website's root directory to the correct device.  ie  'root /mnt/usb'"
 fi
@@ -87,7 +89,7 @@ echo ""
 echo "If you proceed, the original www.conf files will be stored in install/config/backup/"
 read -p "Would you like to patch '/etc/php5/fpm/pool.d/www.conf' (Properly redirects PHP requests)? (y/n) " REPLY
 if [ "$REPLY" = "y" ]; then
-sudo cp /etc/php5/fpm/pool.d/www.conf ./config/backup/php5/www.conf
+sudo cp /etc/php5/fpm/pool.d/www.conf ./config/backup/www.conf
 sudo cp ./config/php5/www.conf /etc/php5/fpm/pool.d/www.conf
 fi
 echo "Installing PyCrypto 2.6"
@@ -105,11 +107,9 @@ echo "Installing Motion (Webcam Server)..."
 echo ""
 sudo apt-get -y install motion
 echo ""
-echo "If you proceed, the original motion files will be stored in install/config/backup/"
 read -p "Would you like to overwrite '/etc/motion/motion.conf' with the default yieldbuddy settings? (y/n) " REPLY
 if [ "$REPLY" = "y" ]; then
 cd ../.
-sudo cp /etc/motion/motion.conf ./config/backup/motion.conf 
 sudo cp ./config/motion.conf /etc/motion/motion.conf
 echo ""
 read -p "Would you like to start the motion web server now? (y/n) " REPLY
@@ -121,8 +121,14 @@ sudo motion
 fi
 fi
 echo ""
+echo "Installing arduino ..."
+echo "  needed to upload new firmware"
+echo ""
+sudo apt-get -y install arduino
+echo ""
 echo "Installing SQLite3 ..."
-echo " and sqlitebrowser."
+echo " and sqlitebrowser to inspect the sql database
+"
 echo ""
 sudo apt-get -y install sqlite3
 sudo apt-get -y install sqlitebrowser
@@ -157,12 +163,12 @@ echo "  type 'crontab -e'and "
 echo "  add '*/2 * * * * /home/pi/scripts/test_network.sh' "
 echo "  and '*/1 * * * * /home/pi/scripts/test_yb.sh'  "
 echo " These scripts act like daemons"
-echo "  one tests your network connection and 
+echo "  one tests your network connection and "
 echo "  the other restarts yieldbuddy.py if it stops running for some reason."
 echo " Note: The '*/2 * * * *' is for running the script every 2 minutes."
 echo ""
 read -p "Would you start yieldbuddy now...? (y/n) " REPLY
-if [ "$REPLY" == "y" ]; then
+if [ "$REPLY" = "y" ]; then
 cd /var/www/yieldbuddy
 sudo python /var/www/yieldbuddy/yieldbuddy.py
 fi
