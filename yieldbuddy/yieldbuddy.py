@@ -284,7 +284,7 @@ def checkSerial():
 				addMessageLog("!!!Updating Firmware!!!")
 				printMessageLog()
 				ser.close()
-				f=os.system("sudo avrdude -V -F -c avrisp2 -p m2560 -P /dev/ttyACM1 -U flash:w:" + app_path + "/upload/firmware.cpp.hex")
+				f=os.system("sudo avrdude -V -F -c avrisp2 -p m2560 -P /dev/ttyACM0 -U flash:w:" + app_path + "/upload/firmware.cpp.hex")
 				serial.Serial(device_path,115200,timeout=15)
 			elif 'Set Raspberry Pi\'s Time to Arduino\'s Time' in Command:
 
@@ -707,7 +707,7 @@ for i in range(0, 9):
 	i=i+1
 	messagelog[i] = " "
 
-print 'yieldbuddy V2.16\r\n'
+print 'yieldbuddy V2.16a\r\n'
 app_path = str( os.path.dirname(os.path.realpath(__file__)) )+"/"
 print 'Application Path: ' + app_path + '\n'
 
@@ -716,16 +716,16 @@ print 'Checking For Possible Serial Devices:'
 f=os.system("ls /dev/tty*")
 
 #print '\r'
-#print 'Enter the path to the serial device.  (/dev/ttyUSB0):'
+#print 'Enter the path to the serial device.  (/dev/ttyACM0):'
 #device_path=raw_input()
-device_path='/dev/ttyUSB0'    #override device_path (no user input)
+device_path='/dev/ttyACM0'    #override device_path (no user input)
 if device_path == '':
-	device_path = '/dev/ttyUSB0'
+	device_path = '/dev/ttyACM0'
 device_path = device_path.strip("\n")
 try:
 	ser = serial.Serial(device_path,9600,timeout=10)
 	ser.flushInput()
-	print 'Opening serial device - /dev/TTYUSB0'
+	print 'Opening serial device - /dev/ttyACM0'
 except:
 	print 'Error opening serial device.'
 	sys.exit(0)
