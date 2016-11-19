@@ -132,6 +132,7 @@ echo " and sqlitebrowser to inspect the sql database
 echo ""
 sudo apt-get -y install sqlite3
 sudo apt-get -y install sqlitebrowser
+tar -xvf SQLiteManager.tar.gz
 echo ""
 read -p "Would you like to copy SQLiteManager to '/var/www/SQLiteManager'...? (y/n) " REPLY
 if [ "$REPLY" = "y" ]; then
