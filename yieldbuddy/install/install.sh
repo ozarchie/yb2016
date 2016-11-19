@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Welcome to the yieldbuddy installer V2.16."
 echo ""
-echo "Copying site to /var/www/yieldbuddy (As with most steps, this will take some time)"
+echo "Copying site to /var/www/yieldbuddy "
 sudo mkdir /var/www/
 sudo cp -R ../../yieldbuddy /var/www/yieldbuddy
 echo ""
@@ -48,7 +48,7 @@ sudo chmod 751 /var/www/yieldbuddy/www/users/
 sudo chown -R pi:pi /var/www
 echo ""
 echo "Warning: the following command OVERWRITES the boot cmdline.txt file."
-echo "Warning: if you have an external USB storage, this could overwrite the configuration"
+echo "Warning: if you have installed external USB storage, this could overwrite the configuration"
 echo "If you proceed, the original cmdline.txt file will be stored in install/config/backup/cmdline.txt"
 read -p "Would you like to overwrite '/boot/cmdline.txt' (Frees up the serial interface)? (y/n) " REPLY
 if [ "$REPLY" = "y" ]; then
@@ -73,13 +73,14 @@ echo ""
 sudo apt-get -y install python-sqlite nginx
 echo ""
 echo "If you proceed, the original nginx files will be stored in install/config/backup/nginx"
-read -p "Would you like to copy site setting and overwrite nginx config files in '/etc/nginx' (Setups up yieldbuddy site with PHP)? (y/n) " REPLY
+read -p "Would you like to copy site setting and overwrite nginx config files in '/etc/nginx'? (y/n) " REPLY
 if [ "$REPLY" = "y" ]; then
 echo "Copying nginx config file"
 sudo cp -r /etc/nginx ./config/backup/
 sudo cp -R ./config/nginx /etc/
 echo "Setup for document root: /var/www/"
-echo "If you have a USB system, change '/etc/nginx/sites-enabled/default' to set the website's root directory to the correct device.  ie  'root /mnt/usb'"
+echo "If you have a USB system, change '/etc/nginx/sites-enabled/default' "
+echo " to set the website's root directory to the correct device.  e.g.  'root /mnt/usb'"
 fi
 echo ""
 echo "Installing PHP"
@@ -103,32 +104,13 @@ sudo apt-get install python-crypto
 # echo "(Step 3/3: Installing PyCrypto 2.6):"
 # sudo python ./setup.py install
 echo ""
-echo "Installing Motion (Webcam Server)..."
-echo ""
-sudo apt-get -y install motion
-echo ""
-read -p "Would you like to overwrite '/etc/motion/motion.conf' with the default yieldbuddy settings? (y/n) " REPLY
-if [ "$REPLY" = "y" ]; then
-cd ../.
-sudo cp ./config/motion.conf /etc/motion/motion.conf
-echo ""
-read -p "Would you like to start the motion web server now? (y/n) " REPLY
-if [ "$REPLY" = "y" ]; then
-sudo mkdir /var/run
-sudo mkdir /var/run/motion
-sudo touch /var/run/motion/motion.pid
-sudo motion
-fi
-fi
-echo ""
 echo "Installing arduino ..."
 echo "  needed to upload new firmware"
 echo ""
 sudo apt-get -y install arduino
 echo ""
 echo "Installing SQLite3 ..."
-echo " and sqlitebrowser to inspect the sql database
-"
+echo " and sqlitebrowser to inspect the sql database "
 echo ""
 sudo apt-get -y install sqlite3
 sudo apt-get -y install sqlitebrowser
@@ -139,8 +121,30 @@ if [ "$REPLY" = "y" ]; then
 echo ""
 sudo cp -R ./SQLiteManager /var/www/SQLiteManager
 fi
+read -p "Would you like to install the motion detection camera? (y/n) " REPLY
+if [ "$REPLY" = "y" ]; then
 echo ""
-echo "Congrats.  You should now see a web interface at <Raspberry Pi's IP Address>/yieldbuddy/."
+echo "Installing Motion (Webcam Server)..."
+echo ""
+sudo apt-get -y install motion
+echo ""
+read -p "Would you like to overwrite '/etc/motion/motion.conf' with the default yieldbuddy settings? (y/n) " REPLY
+if [ "$REPLY" = "y" ]; then
+cd ../.
+sudo cp ./config/motion.conf /etc/motion/motion.conf
+
+echo ""
+read -p "Would you like to start the motion web server now? (y/n) " REPLY
+if [ "$REPLY" = "y" ]; then
+sudo mkdir /var/run
+sudo mkdir /var/run/motion
+sudo touch /var/run/motion/motion.pid
+sudo motion
+fi
+fi
+
+echo ""
+echo "Congratulations.  You should now see a web interface at <Raspberry Pi's IP Address>/yieldbuddy/."
 echo "browse to 'localhost/yieldbuddy/'"
 echo ""
 echo "*** IMPORTANT STEPS WHEN YOU HAVE THE LOGON PAGE WORKING: ***"
@@ -148,7 +152,8 @@ echo ""
 echo " username/password is default/default"
 echo " Change these by editing the  'yieldbuddy/www/users/default.xml' file"
 echo ""
-echo "Make sure to click the 'Restore Defaults' button on the 'System' page of the web interface **everytime** your upload new firmware to the Arduino."
+echo "Make sure to click the 'Restore Defaults' button on the 'System' page of the web interface "
+echo "   **everytime** your upload new firmware to the Arduino."
 echo ""
 echo "To Access /var/www/yieldbuddy, type 'sudo su' first, then 'cd /var/www/yieldbuddy'  now run './yieldbuddy.py'"
 echo " This will open a terminal window with the communications to the arduino visible" 
