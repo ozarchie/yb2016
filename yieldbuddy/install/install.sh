@@ -131,7 +131,7 @@ sudo cp ./config/motion.conf /etc/motion/motion.conf
 sudo mkdir /var/run
 sudo mkdir /var/run/motion
 sudo touch /var/run/motion/motion.pid
-sudo motion
+sudo motion &
 fi
 echo ""
 echo "Congratulations.  You should now see a web interface at <Raspberry Pi's IP Address>/yieldbuddy/."
