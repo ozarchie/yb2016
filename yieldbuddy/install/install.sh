@@ -21,12 +21,12 @@ sudo update-rc.d yieldbuddy defaults
 echo "Making home folder and "
 echo "Linking /var/www/ to homefolder..."
 sudo mkdir /home/pi/www/
+sudo chown pi:pi /home/pi/www
 sudo ln -s /var/www/ /home/pi/www/
-sleep 5
 echo ""
 echo "Changing file permissions..."
 sudo chmod 751 /var/www/yieldbuddy
-sudo chmod 750 /var/www/yieldbuddy/*
+sudo chmod -R 754 /var/www/yieldbuddy/
 sudo touch /var/www/yieldbuddy/Command
 sudo chmod 777 /var/www/yieldbuddy/Command
 sudo chmod 775 /var/www/yieldbuddy/index.html
@@ -38,13 +38,13 @@ sudo chmod +x /var/www/yieldbuddy/restart_mtn
 sudo chmod +x /var/www/yieldbuddy/stop_motion
 sudo chmod +x /var/www/yieldbuddy/start_motion
 sudo chmod +x /var/www/yieldbuddy/yieldbuddy.py
-sudo chmod 751 /var/www/yieldbuddy/www/
-sudo chmod 755 /var/www/yieldbuddy/www/*
-sudo chmod 751 /var/www/yieldbuddy/www/img/
-sudo chmod 751 /var/www/yieldbuddy/www/java/
-sudo chmod 751 /var/www/yieldbuddy/www/settings/
-sudo chmod 751 /var/www/yieldbuddy/www/sql/
-sudo chmod 751 /var/www/yieldbuddy/www/users/
+sudo chmod 751 /var/www/yieldbuddy/www
+sudo chmod -R 755 /var/www/yieldbuddy/www/
+sudo chmod -R 751 /var/www/yieldbuddy/www/img/
+sudo chmod -R 751 /var/www/yieldbuddy/www/java/
+sudo chmod -R 751 /var/www/yieldbuddy/www/settings/
+sudo chmod -R 751 /var/www/yieldbuddy/www/sql/
+sudo chmod -R 751 /var/www/yieldbuddy/www/users/
 sudo chown -R pi:pi /var/www
 echo ""
 echo "Warning: the following command OVERWRITES the boot cmdline.txt file."
