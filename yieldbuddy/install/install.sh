@@ -3,6 +3,8 @@ echo "Welcome to the yieldbuddy installer V2.16."
 echo ""
 echo "Copying site to /var/www/yieldbuddy "
 sudo mkdir /var/www/
+sudo mkdir ./config/backup
+sudo chown pi:pi ./config/backup
 sudo cp -R ../../yieldbuddy /var/www/yieldbuddy
 echo ""
 echo "Copying scripts to /home/pi/scripts..."
@@ -61,6 +63,8 @@ if [ "$REPLY" = "y" ]; then
 sudo cp /etc/inittab ./config/backup/inittab
 sudo cp ./config/inittab /etc/inittab
 fi
+echo "Updating Raspbian headers .."
+sudo apt-get update
 echo ""
 echo "Installing Web Server packages - this will take some time!"
 echo ""
@@ -99,7 +103,7 @@ sudo apt-get install python-crypto
 # sudo python ./setup.py install
 echo ""
 echo "Installing arduino ..."
-echo "  needed to upload new firmware"
+echo "  needed by yb2016 to upload new firmware"
 echo ""
 sudo apt-get -y install arduino
 echo ""
