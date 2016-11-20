@@ -11,11 +11,18 @@ http://yieldbuddy.com/vanilla/discussion/1576/17a-fresh-installation-and-the-sta
   and a few more.
 
 There are a few extra updates, that remove most of the web errors,  
-and stops nginx filling up the disk by turning off error reporting.
+ and stops nginx filling up the disk by turning off error reporting.
 
 
 Motion is still problematic -  
-localhost:8080/8081 work, but not the image on the summary.  
-The current motion.conf does not save images, fluttering leaves fill up the disk!
+localhost:8080/8081 work so you can browse there.  
+The image on the Overview page does not work.   
+Not sure if it is Chromium, motion or gremlins.  
+ 
+The current motion.conf is configured so that itdoes not save images.  
+ fluttering leaves fill up the disk!  
+
+Occasionally, after first install, I have seen Error404, and Error502 from nginx,  
+  but a reboot fixes it.
 
 
