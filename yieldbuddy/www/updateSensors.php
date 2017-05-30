@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_id() == '') {
+    session_start();
+    }
 //var_dump(file_exists($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_sensors_firstrow.php'));
 include $_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_sensors_firstrow.php';
 	  $pH1=$_SESSION['Sensors_pH1'];

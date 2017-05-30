@@ -1,55 +1,3 @@
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript">
-function TurnRelay(number, on_off) {
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-		document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	  }
-	xmlhttp.open("GET","command.php?command=relay" + number + " " + on_off,true);
-	xmlhttp.send();
-}
-
-function TurnAuto(number, isAuto) {
-alert("ok!");
-	var xmlhttp;
-	if (window.XMLHttpRequest) {
-          // code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	} else {
-	  // code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function()
-	{
-	if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-	}
-	xmlhttp.open("GET","command.php?command=Relay" + number + " isAuto " + isAuto,true);
-	xmlhttp.send();
-}
-</script>
-
-<?php
-if (session_id() == '') {
-    session_start();
-    }
-include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php');
-if ($_SESSION['Relay1'] > 1) {
-	exit();
-}
-?>
 <table width="390" border="0">
 <tr>
 <td></td>
@@ -61,15 +9,13 @@ if (session_id() == '') {
     session_start();
     }
 include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php');
-
-	  
-	  //Relay 1
+ 	  //Relay 1
 	  try
 	  {
       echo "<tr>";
-	  echo "<td>Relay1 (WaterPump1): </td>";
+	  echo "<td>Relay1 (WaterPump): </td>";
 	  $Relay1=$_SESSION['Relay1'];
-	  // echo $Relay1. "<br />";
+	  echo $Relay1. "<br />";
 
   	  $Relay1_isAuto = $_SESSION['Relay1_isAuto'];
   		if ($Relay1 == "0") {
@@ -93,9 +39,9 @@ include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php'
 	  try
 	  {
 	  echo "<tr>";
-	  echo "<td>Relay2 (WaterPump2): </td>";
+	  echo "<td>Relay2 (Nutrient): </td>";
 	  $Relay2=$_SESSION['Relay2'];
-	  //echo $Relay2. "<br />";
+	  echo $Relay2. "<br />";
 
   	  $Relay2_isAuto = $_SESSION['Relay2_isAuto'];
   		if ($Relay2 == "0") {
@@ -119,9 +65,9 @@ include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php'
 	  try
 	  {
       echo "<tr>";
-	  echo "<td>Relay3 (Free): </td>";
+	  echo "<td>Relay3 (Humidity): </td>";
 	  $Relay3=$_SESSION['Relay3'];
-	  //echo $Relay3. "<br />";
+	  echo $Relay3. "<br />";
 
   	  $Relay3_isAuto = $_SESSION['Relay3_isAuto'];
   		if ($Relay3 == "0") {
@@ -145,9 +91,9 @@ include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php'
 	  try
 	  {
       echo "<tr>";
-	  echo "<td>Relay4 (Free): </td>";
+	  echo "<td>Relay4 (CO2): </td>";
 	  $Relay4=$_SESSION['Relay4'];
-	  //echo $Relay4. "<br />";
+	  echo $Relay4. "<br />";
 
   	  $Relay4_isAuto = $_SESSION['Relay4_isAuto'];
   		if ($Relay4 == "0") {
@@ -170,9 +116,9 @@ include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php'
 	  try
 	  {
       echo "<tr>";
-	  echo "<td>Relay5 (Free): </td>";
+	  echo "<td>Relay5 (SSRLight): </td>";
 	  $Relay5=$_SESSION['Relay5'];
-	  //echo $Relay5. "<br />";
+	  echo $Relay5. "<br />";
 
   	  $Relay5_isAuto = $_SESSION['Relay5_isAuto'];
   		if ($Relay5 == "0") {
@@ -195,9 +141,9 @@ include ($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/sql_relays_firstrow.php'
 	  try
 	  {
 	  echo "<tr>";
-	  echo "<td>Relay6 (Light-SSR): </td>";
+	  echo "<td>Relay6 (SSRHeat): </td>";
 	  $Relay6=$_SESSION['Relay6'];
-	  //echo $Relay6. "<br />";
+	  echo $Relay6. "<br />";
 
   	  $Relay6_isAuto = $_SESSION['Relay6_isAuto'];
   		if ($Relay6 == "0") {

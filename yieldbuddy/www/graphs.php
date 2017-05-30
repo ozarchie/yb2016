@@ -119,7 +119,8 @@ a:active {
     }
     $db = new SQLite3($_SERVER['DOCUMENT_ROOT'].'/yieldbuddy/www/sql/yieldbuddy.sqlite3');
     $db->busyTimeout(2000);
-    $results = $db->query('SELECT *	FROM Sensors_Log');
+#    $results = $db->query('SELECT *	FROM Sensors_Log');
+    $results = $db->query('SELECT * FROM Sensors_Log WHERE Time > date(\'now\',\'-14 days\')');
 
     $rownum=0;
     while ($row = $results->fetchArray()) {
@@ -260,6 +261,7 @@ Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
     }  
 </script>
 
+<!--
 <script type="text/javascript">
     google.charts.load('current', {'packages':['annotationchart']});
     google.charts.setOnLoadCallback(drawChart);
@@ -349,7 +351,7 @@ function drawChart() {
 
     } 
 </script>
-
+-->
 pH1 and pH2:
 <div id="pH_Chart" style="width: 1050px; height: 400px;"></div>
 </br>
@@ -359,6 +361,7 @@ Temperature [°C]:
 </br>
 <div id="Temperature_Chart" style="width: 1050px; height: 400px;"></div>
 </br>
+<!--
 </br>
 TDS1 and TDS2:
 </br>
@@ -370,7 +373,7 @@ RH, CO2, Light [%]:
 </br>
 </br>
 <div id="Percentage_Chart" style="width: 1050px; height: 400px;"></div>
-
+-->
 </td>
 </body>
 </html>

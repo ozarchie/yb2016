@@ -239,15 +239,14 @@ function TurnRelay(number, on_off) {
 	  }
 	else
 	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  xmlhttp=new ActiveXObject("MicrosoftRel.XMLHTTP");
 	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-		document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	  }
+//	xmlhttp.onreadystatechange=function() {
+//	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+//		{
+//		document.getElementById("relayInfo").innerHTML=xmlhttp.responseText;
+//		}
+//	  }
 	xmlhttp.open("GET","command.php?command=Relay" + number + " " + on_off,true);
 	xmlhttp.send();
 }
@@ -262,13 +261,13 @@ function TurnAuto(number, isAuto) {
 	  {// code for IE6, IE5
 	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-		document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	  }
+//	xmlhttp.onreadystatechange=function()
+//	  {
+//	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+//		{
+//		document.getElementById("relayInfo").innerHTML=xmlhttp.responseText;
+//		}
+//	  }
 	xmlhttp.open("GET","command.php?command=Relay" + number + " isAuto " + isAuto,true);
 	xmlhttp.send();
 }

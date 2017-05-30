@@ -26,7 +26,7 @@ if(isset($_POST['login'])){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <LINK REL="SHORTCUT ICON"
-       HREF="/img/favicon.ico">
+       HREF="/yieldbuddy/www/img/favicon.ico">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Login</title>
 <style type="text/css">
